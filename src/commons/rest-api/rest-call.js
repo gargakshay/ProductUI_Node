@@ -1,29 +1,23 @@
 var http = require('http');
+var fs = require('fs');
+var request = require('request');
 
 var log = require('../logger/logger');
 var URL = require('../../constants/common-url');
 
 var _fileName = 'rest-call';
 
-var requestConfig = function (path) {
+var getReqObj = function (path) {
+    var url = `http://${URL.SERVER_IP}:${URL.SERVER_PORT}${path}`;
+    console.log("URLL**", url);
     return {
-        host: URL.SERVER_IP,
-        port: URL.SERVER_PORT,
-        path: path
-    };
-};
-
-exports.getDataByGetReq = function (path, res) {
-    log.info(_fileName, "getDataByGetReq", `URL= ${path}`);
-
-    http.get(requestConfig(path), function (response) {
-        var body = '';
-        response.on('data', function (d) {
-            body += d;
-        });
-
-        response.on('end', function () {
-            res.send(body);
-        })
-    });
+        url: url,
+        method: 'GET'
+    }
 }
+
+var getDataByGetReq = function (path, res) {
+    request(getReqObj(path)).pipe(res);
+}
+
+exports.getDataByGetReq = getDataByGetReq;

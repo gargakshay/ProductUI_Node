@@ -10,26 +10,36 @@ var URL = require('./constants/common-url');
 /**Import modules for routing data */
 var productUI = require('./routes/product-ui/login');
 
-var app = express();
+var restCall = require('./commons/rest-api/rest-call');
 
 var filename = 'app';
 
-app.use(URL.ROOT, productUI);
+var app = express();
+
 
 /**
  *  The function is executed every time the app receives a request. 
- *  TODO: Need to check, it is calling in case of error.
  * */
 app.use(function (req, res, next) {
-  log.info(filename, 'All Request', req, url);
-  next()
+  var url = req.url;
+  log.info(filename, 'All Request', url);
+  
+  // Handling for data request when we need to some modification in data.
+  if(url && url.startsWith('/node/')){
+    next();
+  }else{
+    restCall.getDataByGetReq(url, res);
+  }
 })
+
+
+app.use(URL.ROOT, productUI);
 
 // error handler 
 app.use(function(err, req, res, next){
     //TODO : More handling
     res.status(err.status || 500);
-    console.log("req", req);
+    // console.log("req", req);
     res.send(`${req.host}${req.url} url is invalid.` ) ;
 });
 
