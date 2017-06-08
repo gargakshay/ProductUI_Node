@@ -1,6 +1,20 @@
 var winston = require('winston');
 
+/**
+ * Defining log levels
+ * By default Log Levels are: { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5 } (0 -5 ) high to low
+ */
+var log_levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  verbose: 3,
+  debug: 4,
+  silly: 5
+}
+
 var logConf = {
+  levels: log_levels,
   transports: [
     new (winston.transports.File)({
       name: 'info-file',
