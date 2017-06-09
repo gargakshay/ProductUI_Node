@@ -12,7 +12,8 @@ var _filename = "login";
 router.use((req, res, next) => {
 
     try {
-        var dcname = req.query.dc;
+        // Get DCName from baseurl (/node/:dc)
+        var dcname = req.baseUrl.substring(6);
         var path = req.url;
         var loaders;
 

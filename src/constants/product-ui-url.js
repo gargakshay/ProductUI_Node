@@ -1,6 +1,6 @@
 
 // http://10.10.50.11:8002/ProductUI/productSummary/SummaryWebService/getProductName
-SERVICE_URL = '/ProductUI/productSummary/SummaryWebService';
+const SERVICE_URL = '/ProductUI/productSummary/SummaryWebService';
 
 exports.SERVICE_URL = SERVICE_URL;
 exports.DCINFO = `/dcinfo`;
