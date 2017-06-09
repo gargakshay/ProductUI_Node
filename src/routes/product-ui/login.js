@@ -88,8 +88,6 @@ router.get(URL.DISK_USAGE, getData);
 /** Get Disk Space */
 router.get(URL.DISK_SPACE, getData);
 
-/** Open Webdashboard */
-router.get(URL.OPEN_WEBDASHBOARD, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
