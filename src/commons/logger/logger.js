@@ -1,12 +1,12 @@
 var winston = require('winston');
-var logConf = require('./log_config.js');
+var logConf = require('./logger.conf.js');
 
 //Creating Logs directory as it doesn't create by itself
 var fs = require('fs');
 var dir = './logs';
 
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
 }
 
 // By default Logging is in this format
@@ -16,28 +16,28 @@ if (!fs.existsSync(dir)){
 var logger = new (winston.Logger)(logConf.conf);
 
 // Defining methods for each log level
-function errorLog(msgInfo){
-  logger.error(msgInfo);
+function errorLog(filename, method, msgInfo) {
+  logger.error(`${filename} : ${method} : ${msgInfo}`);
 }
 
-function warningLog(filename, method, msgInfo){
+function warningLog(filename, method, msgInfo) {
   logger.warn(`${filename} : ${method} : ${msgInfo}`);
 }
 
-function infoLog(filename, method, msgInfo){
+function infoLog(filename, method, msgInfo) {
   logger.info(`${filename} : ${method} : ${msgInfo}`);
 }
 
-function debugLog(msgInfo){
-  logger.debug(msgInfo);
+function debugLog(filename, method, msgInfo) {
+  logger.debug(`${filename} : ${method} : ${msgInfo}`);
 }
 
-function traceLog(msgInfo){
-  logger.silly(msgInfo);
+function traceLog(filename, method, msgInfo) {
+  logger.silly(`${filename} : ${method} : ${msgInfo}`);
 }
 
 // Exporting 
-module.exports = { 
+module.exports = {
   error: errorLog,
   warn: warningLog,
   info: infoLog,
