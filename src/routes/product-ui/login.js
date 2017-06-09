@@ -45,7 +45,7 @@ router.use((req, res, next) => {
 
         async.parallel(loaders, (err, results) => {
             // Set respond data in req. object
-            req.data = results;
+            req.data = results[0];
             next();
         });
     }
@@ -67,6 +67,29 @@ router.get(URL.AUTHENTICATE, getData);
 /** Get DC info to client */
 router.get(URL.DCINFO, getDCInfo)
 
+/** Get Layout JSON */
+router.get(URL.LAYOUT_JSON, getData);
+
+/** Get Test Run Data */
+router.get(URL.TEST_RUN_DATA, getData);
+
+/** Get Build JSON */
+router.get(URL.BUILD_JSON, getData);
+
+/** Get CPU Utilization */
+router.get(URL.CPU_UTILIZATION, getData);
+
+/** Get Heap Memory */
+router.get(URL.HEAP_MEMORY, getData);
+
+/** Get Disk Usage */
+router.get(URL.DISK_USAGE, getData);
+
+/** Get Disk Space */
+router.get(URL.DISK_SPACE, getData);
+
+/** Open Webdashboard */
+router.get(URL.OPEN_WEBDASHBOARD, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
@@ -89,6 +112,10 @@ function getDCInfo(req, res) {
     console.log("dcinfo", dcinfo);
     res.send(dcinfo);
 }
+
+process.on('uncaughtException', (err) => {
+  console.log(err);
+});
 
 
 module.exports = router;
