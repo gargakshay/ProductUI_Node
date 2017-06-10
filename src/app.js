@@ -1,3 +1,5 @@
+"use strict";
+
 /** Import core modules */
 var express = require('express');
 
@@ -9,6 +11,7 @@ var URL = require('./constants/common-url');
 
 /**Import modules for routing data */
 var productUI = require('./routes/product-ui/login');
+var webdashboard = require('./routes/webdashboard/services/tree-service');
 
 var restCall = require('./commons/rest-api/rest-call');
 
@@ -36,6 +39,7 @@ app.use(function (req, res, next) {
 
 
 app.use(URL.ROOT, productUI);
+app.use(URL.ROOT, webdashboard);
 
 // error handler 
 app.use(function (err, req, res, next) {

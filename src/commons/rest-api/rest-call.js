@@ -1,5 +1,9 @@
+"use strict";
+
 var http = require('http');
 var fs = require('fs');
+var zlib = require('zlib');
+
 var request = require('request');
 
 var log = require('../logger/logger');
@@ -18,24 +22,63 @@ var getReqObj = function (path) {
         method: 'GET',
         timeout: conf.timeout
     }
-}
+};
 
 var getDataByGetReq = function (path, res) {
     request(getReqObj(path)).pipe(res);
 }
 
-var getRequest = function (path, callback) {
+var getRequest = function (path, dcname, callback) {
     log.info(_fileName, "getRequest", `Path: ${path}`);
-    console.log("conf.timeout", conf.timeout);
-    request(path, { timeout: conf.timeout }, (err, response, body) => {
+
+    let options = {
+        url: path,
+        timeout: conf.timeout,
+        headers: {
+            'X-some-headers': 'Some headers',
+            'Accept-Encoding': 'gzip, deflate'
+        },
+        encoding: null
+    };
+
+    request(options, (err, response, body) => {
         if (err) {
             callback(err);
         }
         else {
-            callback(null, body);
+            try {
+                var json;
+                if (!err && response.statusCode == 200) {
+                    // If response is gzip, unzip first
+                    var encoding = response.headers['content-encoding']
+                    if (encoding && encoding.indexOf('gzip') >= 0) {
+                        zlib.gunzip(body, function (err, dezipped) {
+                            var json_string = dezipped.toString('utf-8');
+                            json = JSON.parse(json_string);
+                            // Process the json..
+                            var obj = {};
+                            // Added DC Name with Data
+                            obj[dcname] = json;
+                            log.trace(_fileName, "getRequest : Uncompressed = ", obj);
+                            callback(null, obj);
+                        });
+                    } else {
+                        // Response is not gzipped
+                        json = body;
+                        var obj = {};
+                        // Added DC Name with Data
+                        obj[dcname] = json;
+                        log.trace(_fileName, "getRequest", obj);
+                        callback(null, json);
+                    }
+                }
+            }
+            catch (e) {
+                log.error(_fileName, "getRequest", e);
+            }
         }
     });
-}
+};
 
 exports.getDataByGetReq = getDataByGetReq;
 

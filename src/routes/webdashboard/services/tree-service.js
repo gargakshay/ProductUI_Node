@@ -1,15 +1,15 @@
-"use strict";
-
 var express = require('express');
 var async = require('async');
 
-var URL = require('../../constants/product-ui-url');
-var log = require('../../commons/logger/logger');
-var restCall = require('../../commons/rest-api/rest-call');
-var dcinfo = require('../../../conf/dcinfo');
+var URL = require('../../../constants/tree-url');
+var log = require('../../../commons/logger/logger');
+var restCall = require('../../../commons/rest-api/rest-call');
+var dcinfo = require('../../../../conf/dcinfo');
+
+var aggregator = require('../../../../cav_lib/dashboard/tree/tree-aggregator');
 
 var router = express.Router();
-var _filename = "login";
+var _filename = "tree-service";
 
 router.use((req, res, next) => {
 
@@ -58,30 +58,12 @@ router.use((req, res, next) => {
 });
 
 /** Get Product Name */
-router.get(URL.PRODUCT_NAME, getData);
-
-/** Get Refresh Interval Name */
-router.get(URL.REFRESH_INTERVAL_TIME, getData);
-
-/** Check authenticate */
-router.get(URL.AUTHENTICATE, getData);
-
-/** Get DC info to client */
-router.get(URL.DCINFO, getDCInfo)
-
+router.get(URL.TREE_SEARCH, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
+    req.data = aggregator.insertDCNode(req.data);
     res.send(req.data);
-}
-
-function getPosition(string, subString, index) {
-    return string.split(subString, index).join(subString).length;
-}
-
-/** Send DC info to client */
-function getDCInfo(req, res) {    
-    res.send(dcinfo);
 }
 
 
