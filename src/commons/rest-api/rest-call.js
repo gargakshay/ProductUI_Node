@@ -21,7 +21,7 @@ var getReqObj = function (path) {
         url: url,
         method: 'GET',
         timeout: conf.timeout
-    }
+    };
 };
 
 var getDataByGetReq = function (path, res) {
@@ -50,7 +50,7 @@ var getRequest = function (path, dcname, callback) {
                 var json;
                 if (!err && response.statusCode == 200) {
                     // If response is gzip, unzip first
-                    var encoding = response.headers['content-encoding']
+                    var encoding = response.headers['content-encoding'];
                     if (encoding && encoding.indexOf('gzip') >= 0) {
                         zlib.gunzip(body, function (err, dezipped) {
                             var json_string = dezipped.toString('utf-8');
@@ -71,6 +71,11 @@ var getRequest = function (path, dcname, callback) {
                         log.trace(_fileName, "getRequest", obj);
                         callback(null, json);
                     }
+                }
+                else
+                {
+                    log.error(_fileName, "getRequest", "response statusCode is " + response.statusCode);
+                    callback(null);
                 }
             }
             catch (e) {
