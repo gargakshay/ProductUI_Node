@@ -2,6 +2,7 @@
 
 /** Import core modules */
 var express = require('express');
+var compression = require('compression');
 
 /** Import logger */
 var log = require('./commons/logger/logger');
@@ -11,7 +12,7 @@ var URL = require('./constants/common-url');
 
 /**Import modules for routing data */
 var productUI = require('./routes/product-ui/login');
-var webdashboard = require('./routes/webdashboard/services/tree-service');
+var webdashboard = require('./routes/webdashboard/services/');
 
 var restCall = require('./commons/rest-api/rest-call');
 
@@ -19,6 +20,7 @@ var filename = 'app';
 
 var app = express();
 
+// app.use(compression());
 
 /**
  *  The function is executed every time the app receives a request. 
@@ -35,7 +37,7 @@ app.use(function (req, res, next) {
   else {
     restCall.getDataByGetReq(url, res);
   }
-})
+});
 
 
 app.use(URL.ROOT, productUI);

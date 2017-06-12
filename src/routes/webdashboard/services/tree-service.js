@@ -12,11 +12,15 @@ var router = express.Router();
 var _filename = "tree-service";
 
 router.use((req, res, next) => {
-
+    /**
+     * req.baseUrl -> /node/PKY/DashboardServer/web
+     * req.subBaseUrl -> /DashboardServer/web
+     */
+    req.subBaseUrl = "/" + req.baseUrl.split("/").slice(3).join("/");
     try {
         // Get DCName from baseurl (/node/:dc)
-        var dcname = req.baseUrl.substring(6);
-        var path = req.url;
+        var dcname = req.baseUrl.split("/")[2];
+        var path = req.subBaseUrl + req.url;
         var loaders;
 
         // In case of requested DC is ALL then we need to merge all DC data.
