@@ -96,11 +96,14 @@ router.get(URL.TEST_RUN_DETAILS_JSON, getData);
 /**Get Filter TR Data */
 router.get(URL.FILTER_TEST_RUN_DETAILS, getData);
 
-/**Get Filter TR Data */
+/**Get Sceanrio Data */
 router.get(URL.SCENARIO_LIST, getData);
 
-/**Get Filter TR Data */
+/**Get Proj Sub Proj TR Data */
 router.get(URL.PROJ_SUBPROJ_LIST, getData);
+
+/**Get Proj Sub Proj Scenario Data */
+router.get(URL.PROJ_SUBPROJ_SCENARIO_LIST, getData);
 
 
 /** Using for get directly data from NDE node */
