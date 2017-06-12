@@ -90,6 +90,18 @@ router.get(URL.DISK_USAGE, getData);
 /** Get Disk Space */
 router.get(URL.DISK_SPACE, getData);
 
+/**Get TR Data */
+router.get(URL.TEST_RUN_DETAILS_JSON, getData);
+
+/**Get Filter TR Data */
+router.get(URL.FILTER_TEST_RUN_DETAILS, getData);
+
+/**Get Filter TR Data */
+router.get(URL.SCENARIO_LIST, getData);
+
+/**Get Filter TR Data */
+router.get(URL.PROJ_SUBPROJ_LIST, getData);
+
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {

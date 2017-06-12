@@ -18,3 +18,12 @@ exports.CPU_UTILIZATION = `${SERVICE_URL}/getCPUUtilization`;
 exports.HEAP_MEMORY = `${SERVICE_URL}/getHeapMemory`;
 exports.DISK_USAGE = `${SERVICE_URL}/getDiskUsageDTO`;
 exports.DISK_SPACE = `${SERVICE_URL}/getDiskSpaceData`;
+
+// Test Run Page URL's
+exports.TEST_RUN_DETAILS_JSON = `${SERVICE_URL}/getTestRunDetailsJsonData`;
+exports.FILTER_TEST_RUN_DETAILS = `${SERVICE_URL}/getFilterTestRunDetailsData`;
+
+// Scenario Data
+exports.SCENARIO_LIST = `${SERVICE_URL}/getScenarioList`;
+exports.PROJ_SUBPROJ_LIST = `${SERVICE_URL}/getProjSubprojList`;
+
