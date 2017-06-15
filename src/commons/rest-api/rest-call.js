@@ -60,7 +60,7 @@ var getRequest = function (path, dcname, callback) {
                             // Added DC Name with Data
                             obj[dcname] = json;
                             log.trace(_fileName, "getRequest : Uncompressed = ", obj);
-                            callback(null, obj);
+                            callback(null, json);
                         });
                     } else {
                         // Response is not gzipped
@@ -68,7 +68,7 @@ var getRequest = function (path, dcname, callback) {
                         var obj = {};
                         // Added DC Name with Data
                         obj[dcname] = json;
-                        log.trace(_fileName, "getRequest", obj);
+                        log.trace(_fileName, "getRequest", JSON.stringify(obj));
                         callback(null, json);
                     }
                 }
