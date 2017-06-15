@@ -14,6 +14,9 @@ var URL = require('./constants/common-url');
 var productUI = require('./routes/product-ui/login');
 var webdashboard = require('./routes/webdashboard/services/');
 
+/** Middleware */
+var middlewares = require("./middleware/middleware");
+
 var restCall = require('./commons/rest-api/rest-call');
 
 var filename = 'app';
@@ -39,6 +42,9 @@ app.use(function (req, res, next) {
   }
 });
 
+app.use(URL.ROOT, middlewares, (req, res, next) => {
+  next();
+});
 
 app.use(URL.ROOT, productUI);
 app.use(URL.ROOT, webdashboard);
