@@ -24,6 +24,11 @@ router.get(URL.DASHBOARD_CONVERT_CHART_AND_GET_DATA, getData);
 /** Update Dashboard Data Packets */
 router.get(URL.DASHBOARD_CONVERT_CHART, getData);
 
+/** Pause Resume test */
+router.get(URL.DASHBOARD_PAUSE_RESUME_TEST, getData);
+
+/** Delete Widget */
+router.get(URL.DASHBOARD_DELETE_WIDGET, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {

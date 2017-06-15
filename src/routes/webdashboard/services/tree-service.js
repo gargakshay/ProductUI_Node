@@ -14,8 +14,23 @@ var _filename = "tree-service";
 /** Get Product Name */
 router.get(URL.TREE_SEARCH, getData);
 
-/** Get Custom Tree */
+/** Tree Operations */
+router.get(URL.DASHBOARD_STANDARD_TREE_OPERATIONS, getData);
+
+/** Update Custom Tree Data */
+router.get(URL.DASHBOARD_UPDATE_CUSTOM_TREE_DATA, getData);
+
+/** Custom Tree Data */
 router.get(URL.CUSTOM_TREE, getData);
+
+/** Custom Merge with selected Panel Tree */
+router.get(URL.DASHBOARD_CUSTOM_MERGE_WITH_SELECTED_PANEL, getData);
+
+/** Open Merge Window Tree */
+router.get(URL.DASHBOARD_OPEN_MERGE_WINDOW_defaultFilter, getData);
+
+/** Dropping Graph on Panel */
+router.get(URL.DASHBOARD_STANDARD_TREE_DROP_NODE, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
