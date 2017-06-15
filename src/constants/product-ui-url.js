@@ -26,5 +26,6 @@ exports.FILTER_TEST_RUN_DETAILS = `${SERVICE_URL}/getFilterTestRunDetailsData`;
 // Scenario Data
 exports.SCENARIO_LIST = `${SERVICE_URL}/getScenarioList`;
 exports.PROJ_SUBPROJ_LIST = `${SERVICE_URL}/getProjSubprojList`;
-exports.PROJ_SUBPROJ_SCENARIO_LIST = `${SERVICE_URL}/getProjSubprojSceanrioList`;
+exports.PROJ_SUBPROJ_SCENARIO_LIST = `${SERVICE_URL}/getProjectSubProjectScenarioList`;
+exports.SET_LOGGING_INFO = `${SERVICE_URL}/setLoggingInfo`;
 
