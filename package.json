@@ -17,6 +17,7 @@
     "winston": "^2.3.1"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "debug": "^2.6.8",
     "request": "^2.81.0",
     "winston-levelonly": "^1.0.3"

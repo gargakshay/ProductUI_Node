@@ -31,7 +31,7 @@ router.use((req, res, next) => {
                     let url = `${req.protocol}://${dcobj.ip}:${dcobj.port}${path}`;
 
                     return function (callback) {
-                        restCall.getRequest(url, dcobj.dc, callback);
+                        restCall.getRequestForALL(url, dcobj.dc, callback, req.query);
                     };
                 });
             }
@@ -44,7 +44,11 @@ router.use((req, res, next) => {
 
                 let url = `${req.protocol}://${dcobj.ip}:${dcobj.port}${path}`;
                 loaders = [function (callback) {
-                    restCall.getRequest(url, dcname, callback)
+
+                    if(req.method == 'GET')
+                      restCall.getRequest(url, dcname, callback)
+                    else  
+                      restCall.postRequest(url, dcname, callback, req.body)
                 }];
             }
 
