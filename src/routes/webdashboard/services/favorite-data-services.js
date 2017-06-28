@@ -1,7 +1,7 @@
 var express = require('express');
 var async = require('async');
 
-var URL = require('../../../constants/favorite-data-url');
+var URL = require('../../../constants/dashboard-data-url');
 var log = require('../../../commons/logger/logger');
 
 var router = express.Router();

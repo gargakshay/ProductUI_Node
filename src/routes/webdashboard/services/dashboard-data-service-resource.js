@@ -30,6 +30,12 @@ router.get(URL.DASHBOARD_PAUSE_RESUME_TEST, getData);
 /** Delete Widget */
 router.get(URL.DASHBOARD_DELETE_WIDGET, getData);
 
+/** Configuration Settings */
+router.get(URL.CONFIGURATIONS_SETTING, getData);
+
+/** Update Config Settings */
+router.get(URL.UPDATE_CONFIG_SETTINGS, getData);
+
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
       res.send(req.data);

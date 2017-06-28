@@ -1,7 +1,7 @@
 var express = require('express');
 var async = require('async');
 
-var URL = require('../../../constants/dashboard-common-url');
+var URL = require('../../../constants/dashboard-data-url');
 var log = require('../../../commons/logger/logger');
 
 var router = express.Router();
@@ -45,6 +45,9 @@ router.get(URL.DASHBOARD_COLOR_CHANGE_DATA, getData);
 
 /** Dashboard Color Mgmt */
 router.get(URL.DASHBOARD_COLOR_MANAGEMENT, getData);
+
+/** Dashboard  Pause Resume Log */
+router.get(URL.DASHBOARD_PAUSE_RESUME_LOG, getData);
 
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {

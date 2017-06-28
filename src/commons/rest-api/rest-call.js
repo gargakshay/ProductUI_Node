@@ -89,6 +89,7 @@ var getRequest = function (path, dcname, callback) {
     });
 };
 
+/** Function responsible for getting Data in case ALL is selected */
 var getRequestForALL = function(path, dcname, callback, query) {
   log.info(_fileName, "getRequest", `Path: ${path}`);
     let options = requestOptions(path);
@@ -104,6 +105,7 @@ var getRequestForALL = function(path, dcname, callback, query) {
     });
 }
 
+/** Function responsible for handling Post request */
 var postRequest = function (path, dcname, callback, body) {
     log.info(_fileName, "postRequest", `Path: ${path}`);
 
@@ -126,6 +128,7 @@ var postRequest = function (path, dcname, callback, body) {
     });
 }
 
+/** Responsible for checking if request is decode or not */
 var decodeRequest = function (err, response, body, dcname) {
     var json;
     try {
@@ -209,16 +212,23 @@ var decodeRequestForALL = function(err, response, body, dcname, query) {
     return json;
 }
 
+/** Function responsible for getting DC Host */
 var getDCHost = function (url) {
     let host = '';
     try {
         /** URL is in the form /tomcat/DCNAME/ProductUI */
         let dcname = url.split('/')[2];
+        var dcobj;
 
-        //Getting IP and Port for requested DC 
-        var dcobj = dcinfo.find((info) => {
-            return info.dc === dcname;
-        });
+        //If ALL is selected, in case of Product UI ,consider ALl as Master
+        if(dcname === 'ALL') {
+            dcname = dcinfo[1][0].master;
+            dcobj = getDCObj(dcname);
+        }
+        else {
+            dcobj = getDCObj(dcname);
+        }
+
         var path = url.split('/').splice(3).join('/');
 
         host = `http://${dcobj.ip}:${dcobj.port}/${path}`;
@@ -229,6 +239,17 @@ var getDCHost = function (url) {
     return host;
 }
 
+/** returns DC obj for provided DC name from DC Map */
+var getDCObj = function(dcname) {
+    //Getting IP and Port for requested DC 
+    var dcobj = dcinfo[0].find((info) => {
+        return info.dc === dcname;
+    });
+    
+    return dcobj;
+}
+
+/** This is to add ismultiDCMode to check that request is comming from Node side */
 var interceptURL = function(path, res) {
 
     request(getReqObj(path), (err, response, body) => {

@@ -52,6 +52,12 @@ router.get(URL.GET_SCENARIO_PROFILE_LIST, getData);
 /** OPen Scen Profile */
 router.get(URL.OPEN_SCEN_PROFILE, getData);
 
+/** Get default Keyword */
+router.post(URL.GET_DEFAULT_KEYWORD, getData);
+
+/** Save Handler */
+router.post(URL.SAVE_HANDLER, getData);
+
 /** Using for get directly data from NDE node */
 function getData(req, res, next) {
     res.send(req.data);

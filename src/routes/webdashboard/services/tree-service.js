@@ -1,7 +1,7 @@
 var express = require('express');
 var async = require('async');
 
-var URL = require('../../../constants/tree-url');
+var URL = require('../../../constants/dashboard-data-url');
 var log = require('../../../commons/logger/logger');
 var restCall = require('../../../commons/rest-api/rest-call');
 var dcinfo = require('../../../../conf/dcinfo');

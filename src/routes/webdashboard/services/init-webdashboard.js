@@ -1,6 +1,6 @@
 var express = require('express');
 
-var URL = require('../../../constants/tree-url');
+var URL = require('../../../constants/dashboard-data-url');
 var log = require('../../../commons/logger/logger');
 
 var router = express.Router();

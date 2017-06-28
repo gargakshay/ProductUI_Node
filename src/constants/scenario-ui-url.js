@@ -15,3 +15,5 @@ exports.OPEN_SCEN_FILE = `${SCENARIO_WEB_SERVICE_URL}/openScenFile`;
 exports.COPY_SCENARIO = `${SUMMARY_WEB_SERVICE}/copyScenario`;
 exports.GET_SCENARIO_PROFILE_LIST = `${SUMMARY_WEB_SERVICE}/getScenarioProfileList`;
 exports.OPEN_SCEN_PROFILE = `${SUMMARY_WEB_SERVICE}/openScenProfile`;
+exports.GET_DEFAULT_KEYWORD = `${SCENARIO_WEB_SERVICE_URL}/getDefaultKeywordData`;
+exports.SAVE_HANDLER = `${SCENARIO_WEB_SERVICE_URL}/saveHandler`;
